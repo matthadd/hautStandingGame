@@ -1,0 +1,50 @@
+[
+  {
+    "name": "BRINGUE",
+    "description": "Thursday night or not it's time to buy some booze",
+    "movePoints": -5,
+    "weight": 100
+  },
+  {
+    "name": "SNK",
+    "description": "Catch your roomates to play",
+    "movePoints": -5,
+    "weight": 5
+  },
+  {
+    "name": "FLOP",
+    "description": "Someone is doing a mistake right now and you can't do anything about it",
+    "movePoints": -5,
+    "weight": 90
+  },
+  {
+    "name": "REVISION",
+    "description": "Exam soon...",
+    "movePoints": -5,
+    "weight": 10
+  },
+  {
+    "name": "EXAM",
+    "description": "Exam now",
+    "movePoints": -5,
+    "weight": 20
+  },
+  {
+    "name": "VESQUI",
+    "description": "You try to escape something",
+    "movePoints": -5,
+    "weight": 10
+  },
+  {
+    "name": "RAMADAN",
+    "description": "Time to be a vampire",
+    "movePoints": -5,
+    "weight": 50
+  },
+  {
+    "name": "FLEX",
+    "description": "It's flex time",
+    "movePoints": -5,
+    "weight": 50
+  }
+]
