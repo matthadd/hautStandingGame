@@ -1,12 +1,15 @@
 package com.hautmointoir.game.shared;
 
-public class BoardComponent implements BoardComponentInterface {
+import java.io.Serializable;
+
+public class BoardComponent implements Serializable, BoardComponentInterface {
     public String name;
     public String description;
     public int movePoints;
     public int weight;
 
-    public BoardComponent() {}
+    public BoardComponent() {
+    }
 
     public BoardComponent(String name, String description, int movePoints, int weight) {
         this.name = name;

@@ -1,10 +1,11 @@
 package com.hautmointoir.game.shared;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class State {
+public class State implements Serializable {
     public Board board;
     public List<Player> players = new ArrayList<>();
 
@@ -22,7 +23,7 @@ public class State {
 
     public void deletePlayers(Player... players) {
         for (Player p : players) {
-                this.players.remove(p);
+            this.players.remove(p);
             System.out.println(p + " deleted");
         }
     }

@@ -2,18 +2,18 @@ package com.hautmointoir.game.shared;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.ResourceUtils;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Board {
-    List<BoardComponent> boardComponents = new ArrayList<>();
+public class Board implements Serializable {
+    public List<BoardComponent> boardComponents = new ArrayList<>();
 
     @Value("classpath:boardComponents.json")
     Resource resourceFile;
@@ -21,10 +21,8 @@ public class Board {
     public Board() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
-        Path file = ResourceUtils.getFile("C:\\Users\\kali\\Downloads\\game\\src\\main\\resources\\boardComponents.json").toPath();
-
         // read the json from the array in the res file
-        BoardComponent[] allComponents = mapper.readValue(Files.readString(Path.of("C:\\Users\\kali\\Downloads\\game\\src\\main\\resources\\boardComponents.json")), BoardComponent[].class);
+        BoardComponent[] allComponents = mapper.readValue(Files.readString(Path.of("src\\main\\resources\\boardComponents.json")), BoardComponent[].class);
 
         // while the board is not complete
         while (this.boardComponents.size() < 20) {

@@ -1,8 +1,9 @@
 package com.hautmointoir.game.shared;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Room {
+public class Room implements Serializable {
     public int id;
     public State roomState;
     public int playerID;

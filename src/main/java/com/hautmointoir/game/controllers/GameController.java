@@ -1,21 +1,28 @@
 package com.hautmointoir.game.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hautmointoir.game.server.engine.ActionCommand;
 import com.hautmointoir.game.server.engine.MoveCommand;
 import com.hautmointoir.game.shared.Player;
 import com.hautmointoir.game.shared.Room;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.io.*;
 
 @RestController
+@RequestMapping("/game")
 public class GameController {
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index() throws IOException {
         Room room = new Room();
         System.out.println(room.roomState.board.size());
-        return "Greetings from Spring Boot!";
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(room);
+        WriteObjectToFile(room);
+        Room r = (Room) ReadObjectFromFile("test");
+        return json;
+
     }
 
     @PostMapping("/addPlayer")
@@ -28,7 +35,7 @@ public class GameController {
         // add Player to list
         // return Player id ?
 
-        return "Player: " + player.toString() ;
+        return "Player: " + player.toString();
     }
 
     @GetMapping("/join")
@@ -69,7 +76,7 @@ public class GameController {
         // else
         // then need player id ?
         // return current state of the room
-        return "ID: " ;
+        return "ID: ";
     }
 
     @PostMapping("/action")
@@ -81,7 +88,38 @@ public class GameController {
         // else
         // then need player id ?
         // return current state of the room
-        return "ID: " ;
+        return "ID: ";
     }
 
+    public void WriteObjectToFile(Object serObj) {
+        try {
+
+            FileOutputStream fileOut = new FileOutputStream("test");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(serObj);
+            objectOut.close();
+            System.out.println("The Object  was succesfully written to a file");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    public Object ReadObjectFromFile(String filepath) {
+
+        try {
+
+            FileInputStream fileIn = new FileInputStream(filepath);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+
+            Object obj = objectIn.readObject();
+
+            System.out.println("The Object has been read from the file");
+            objectIn.close();
+            return obj;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

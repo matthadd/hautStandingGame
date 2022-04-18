@@ -1,4 +1,3 @@
-
 package com.hautmointoir.game.server;
 
 import org.springframework.http.HttpHeaders;
@@ -14,7 +13,7 @@ public class Controllers {
 
     @RequestMapping(value = "hello")
     public ResponseEntity<String> sayHello() {
-        final HttpHeaders httpHeaders= new HttpHeaders();
+        final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<String>("{\"msg\": \"Hello World\"}", httpHeaders, HttpStatus.OK);
     }
