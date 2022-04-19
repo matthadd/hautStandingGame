@@ -28,8 +28,8 @@ public abstract class Engine {
     }
 
     /* Player can have an advantage at rollDices ?
-    * Maybe next evol
-    * */
+    * Maybe in next feature
+    */
     public int rollDices(Player p) {
         Random r = new Random();
         return r.nextInt(1,13);
