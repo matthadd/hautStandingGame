@@ -1,6 +1,7 @@
 package com.hautmointoir.game.shared;
 
 public class Player {
+    public int id;
 
     public String name;
     public int x = 0;

@@ -13,16 +13,15 @@ import java.util.List;
 import java.util.Random;
 
 public class Board implements Serializable {
-    public List<BoardComponent> boardComponents = new ArrayList<>();
 
-    @Value("classpath:boardComponents.json")
-    Resource resourceFile;
+    public List<BoardComponent> boardComponents = new ArrayList<>();
 
     public Board() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
         // read the json from the array in the res file
-        BoardComponent[] allComponents = mapper.readValue(Files.readString(Path.of("src\\main\\resources\\boardComponents.json")), BoardComponent[].class);
+        final String PATH_TO_RES = "src\\main\\resources\\gameRes\\boardComponents.json";
+        BoardComponent[] allComponents = mapper.readValue(Files.readString(Path.of(PATH_TO_RES)), BoardComponent[].class);
 
         // while the board is not complete
         while (this.boardComponents.size() < 63) {

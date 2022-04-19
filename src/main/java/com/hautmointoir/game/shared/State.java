@@ -11,7 +11,7 @@ public class State implements Serializable {
 
     public Player currentPlayer;
 
-    int turn = 0;
+    public int turn = 0;
 
     public State() throws IOException {
         this.board = new Board();
@@ -37,8 +37,11 @@ public class State implements Serializable {
 
     public Player incrementPlayer() {
         this.turn +=1;
-
         return  new Player();
+    }
+
+    public boolean canPlayer(Player p) {
+        return (p.id == this.getCurrentPlayer().id);
     }
 
 
