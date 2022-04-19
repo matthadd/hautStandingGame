@@ -1,7 +1,7 @@
 package com.hautmointoir.game.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hautmointoir.game.server.engine.ActionCommand;
+import com.hautmointoir.game.server.engine.DrawCardCommand;
 import com.hautmointoir.game.server.engine.MoveCommand;
 import com.hautmointoir.game.shared.Player;
 import com.hautmointoir.game.shared.Room;
@@ -11,7 +11,10 @@ import java.io.*;
 
 @RestController
 @RequestMapping("/game")
+@CrossOrigin(origins = "*")
 public class GameController {
+
+    final String PATH_TO_ROOMS = "src/main/resources/game/rooms/";
 
     @GetMapping("")
     public String index() throws IOException {
@@ -20,8 +23,16 @@ public class GameController {
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(room);
         WriteObjectToFile(room);
-        Room r = (Room) ReadObjectFromFile("test");
-        return json;
+        Room r = (Room) ReadObjectFromFile(PATH_TO_ROOMS + "/1");
+        return mapper.writeValueAsString(r);
+
+    }
+
+    @GetMapping("/test")
+    public int test() throws IOException {
+        MoveCommand moveCommand = new MoveCommand();
+
+        return moveCommand.rollDices();
 
     }
 
@@ -79,9 +90,9 @@ public class GameController {
         return "ID: ";
     }
 
-    @PostMapping("/action")
+    @PostMapping("/draw")
     @ResponseBody
-    public String action(@RequestBody ActionCommand actionCommand) {
+    public String action(@RequestBody DrawCardCommand actionCommand) {
         // check if room doesnt exist
         // if not send packet room closed
 
@@ -94,11 +105,11 @@ public class GameController {
     public void WriteObjectToFile(Object serObj) {
         try {
 
-            FileOutputStream fileOut = new FileOutputStream("test");
+            FileOutputStream fileOut = new FileOutputStream(PATH_TO_ROOMS + "/1");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(serObj);
             objectOut.close();
-            System.out.println("The Object  was succesfully written to a file");
+            System.out.println("The Object  was successfully written to a file");
 
         } catch (Exception ex) {
             ex.printStackTrace();

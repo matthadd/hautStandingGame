@@ -25,7 +25,7 @@ public class Board implements Serializable {
         BoardComponent[] allComponents = mapper.readValue(Files.readString(Path.of("src\\main\\resources\\boardComponents.json")), BoardComponent[].class);
 
         // while the board is not complete
-        while (this.boardComponents.size() < 20) {
+        while (this.boardComponents.size() < 63) {
             // we shuffle the list of possibilities
             this.shuffle(allComponents);
             // we choose the first possibility if random < weight (if weight is big, probability to choose it is big)

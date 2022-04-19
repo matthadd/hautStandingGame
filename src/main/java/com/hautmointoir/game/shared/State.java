@@ -9,6 +9,9 @@ public class State implements Serializable {
     public Board board;
     public List<Player> players = new ArrayList<>();
 
+    public Player currentPlayer;
+
+    int turn = 0;
 
     public State() throws IOException {
         this.board = new Board();
@@ -27,6 +30,18 @@ public class State implements Serializable {
             System.out.println(p + " deleted");
         }
     }
+
+    public Player getCurrentPlayer() {
+        return this.currentPlayer;
+    }
+
+    public Player incrementPlayer() {
+        this.turn +=1;
+
+        return  new Player();
+    }
+
+
 
     public int toTest() {
         return 0;

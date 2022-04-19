@@ -8,6 +8,8 @@ public class BoardComponent implements Serializable, BoardComponentInterface {
     public int movePoints;
     public int weight;
 
+    public boolean canDrawCard;
+
     public BoardComponent() {
     }
 
