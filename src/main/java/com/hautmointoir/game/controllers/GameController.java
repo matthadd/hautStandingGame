@@ -35,9 +35,9 @@ public class GameController {
 
     }
 
-    @PostMapping("/addPlayer")
+    @PostMapping("/register")
     @ResponseBody
-    public String addPlayer(@RequestBody Player player) {
+    public String register(@RequestBody Player player) {
         // check if player exist
 
         // if false
@@ -46,6 +46,19 @@ public class GameController {
         // return Player id
 
         return "Player: " + player.toString();
+    }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public boolean login(@RequestBody int id) {
+        // check if player exist
+
+        // if false
+        // add Player to list
+
+        // return Player id
+
+        return true;
     }
 
     @GetMapping("/join")
