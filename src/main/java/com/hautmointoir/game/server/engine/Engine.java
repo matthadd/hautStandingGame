@@ -9,7 +9,6 @@ public abstract class Engine {
 
     State currentState;
     public Engine() {
-
     }
 
     // work do to on it...

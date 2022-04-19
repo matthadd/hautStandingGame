@@ -5,6 +5,7 @@ import com.hautmointoir.game.server.engine.DrawCardCommand;
 import com.hautmointoir.game.server.engine.MoveCommand;
 import com.hautmointoir.game.shared.Player;
 import com.hautmointoir.game.shared.Room;
+import com.hautmointoir.game.shared.State;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
@@ -16,6 +17,7 @@ public class GameController {
 
     final String PATH_TO_ROOMS = "src/main/resources/gameStorage/rooms/";
 
+/*
     @GetMapping("")
     public String index() throws IOException {
         Room room = new Room();
@@ -29,11 +31,13 @@ public class GameController {
 
     @GetMapping("/test")
     public int test() throws IOException {
-        MoveCommand moveCommand = new MoveCommand();
+        State state = new State();
+        MoveCommand moveCommand = new MoveCommand(state);
 
         return moveCommand.rollDices();
 
     }
+*/
 
     @PostMapping("/register")
     @ResponseBody
@@ -63,7 +67,7 @@ public class GameController {
 
     @GetMapping("/join")
     @ResponseBody
-    public String join(@RequestParam int id) {
+    public String join(@RequestParam int roomId) {
         // check if room exist
 
         // if false
@@ -75,7 +79,7 @@ public class GameController {
         // add Player to room
 
         // return state of room
-        return "ID: " + id;
+        return "roomId: " + roomId;
     }
 
     @GetMapping("/update")

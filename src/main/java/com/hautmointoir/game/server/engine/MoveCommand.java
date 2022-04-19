@@ -7,10 +7,25 @@ import java.util.Random;
 
 public class MoveCommand extends Engine {
 
-    public  MoveCommand() {}
+    State currentState;
 
-    public void process(State state) {
-        Player p = state.getCurrentPlayer();
+    public MoveCommand(State state) {
+        this.currentState = state;
+    }
+
+    public Player process(Player player) {
+        if(this.currentState.currentPlayer.id != player.id) return null;
+
+        int expectedPosition = player.getPosition() + this.rollDices();
+
+        if (expectedPosition > this.currentState.board.size()){
+            int diff = expectedPosition - this.currentState.board.size();
+            player.setPosition( player.getPosition() - diff);
+            return player;
+        }
+
+        player.setPosition(expectedPosition);
+        return player;
     }
 
 
