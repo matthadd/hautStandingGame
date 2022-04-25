@@ -12,6 +12,11 @@ public class Room implements Serializable {
         this.roomState = new State();
     }
 
+    public Room(int id) throws IOException {
+        this.id = id;
+        this.roomState = new State();
+    }
+
     @Override
     public String toString() {
         return "Room{" +

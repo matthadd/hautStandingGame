@@ -16,6 +16,7 @@ public class GameController {
 
     final String PATH_TO_ROOMS = "src/main/resources/gameStorage/rooms/";
 
+/*
     @GetMapping("")
     public String index() throws IOException {
         Room room = new Room();
@@ -29,11 +30,13 @@ public class GameController {
 
     @GetMapping("/test")
     public int test() throws IOException {
-        MoveCommand moveCommand = new MoveCommand();
+        State state = new State();
+        MoveCommand moveCommand = new MoveCommand(state);
 
         return moveCommand.rollDices();
 
     }
+*/
 
     @PostMapping("/register")
     @ResponseBody
@@ -51,19 +54,19 @@ public class GameController {
     @PostMapping("/login")
     @ResponseBody
     public boolean login(@RequestBody int id) {
-        // check if player exist
+        // check if id exist
 
         // if false
-        // add Player to list
+        // return 404
 
-        // return Player id
+        // return true
 
         return true;
     }
 
     @GetMapping("/join")
     @ResponseBody
-    public String join(@RequestParam int id) {
+    public String join(@RequestParam int roomId) {
         // check if room exist
 
         // if false
@@ -75,12 +78,12 @@ public class GameController {
         // add Player to room
 
         // return state of room
-        return "ID: " + id;
+        return "roomId: " + roomId;
     }
 
     @GetMapping("/update")
     @ResponseBody
-    public String update(@RequestParam int roomID) {
+    public String update(@RequestParam int roomID) throws IOException {
 
         // check if room exist
 
@@ -90,7 +93,9 @@ public class GameController {
         // if false
         // return room close msg (ex : {room : closed}, or 404 Error, ...)
 
-        return "ID: " + roomID;
+        ObjectMapper mapper = new ObjectMapper();
+        Room room = new Room(roomID);
+        return mapper.writeValueAsString(room);
     }
 
     @PostMapping("/roll")
@@ -100,20 +105,10 @@ public class GameController {
         // if not send packet room closed
 
         // else
-        // then need player id ?
+        // then need player id
+        // move command
         // return current state of the room
-        return "ID: ";
-    }
 
-    @PostMapping("/draw")
-    @ResponseBody
-    public String draw(@RequestBody DrawCardCommand actionCommand) {
-        // check if room doesnt exist
-        // if not send packet room closed
-
-        // else
-        // then need player id ?
-        // return current state of the room
         return "ID: ";
     }
 

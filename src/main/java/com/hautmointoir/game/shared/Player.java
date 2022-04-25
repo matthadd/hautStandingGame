@@ -1,29 +1,36 @@
 package com.hautmointoir.game.shared;
 
 public class Player {
-    public int id;
+    public int id = 0;
 
     public String name;
-    public int x = 0;
-    public int score = 0;
+    public int position = 0;
     public boolean isFcked = false;
+
     public Player() {}
 
-    public Player(String name, int score) {
+    public Player(String name) {
         this.name = name;
-        this.score = score;
     }
 
-    public void setPosition(int x, int y) {
-        this.x = x;
+    public Player(String name, int id) {
+        this.name = name;
+        this.id = id;
     }
+
+    public int getId() {return this.id;}
+    public void setId(int id) {this.id = id;}
+
+    public int getPosition() {return this.position;}
+    public void setPosition(int x) {this.position = x;}
+
 
     @Override
     public String toString() {
         return "Player{" +
-                "name='" + name + '\'' +
-                ", x=" + x +
-                ", score=" + score +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", position=" + position +
                 '}';
     }
 }

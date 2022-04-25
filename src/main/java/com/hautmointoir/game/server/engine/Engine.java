@@ -7,36 +7,30 @@ import java.util.Random;
 
 public abstract class Engine {
 
-    State state;
-
+    State currentState;
     public Engine() {
+    }
 
+    // work do to on it...
+    public boolean processCommand() {
+        return true;
     }
 
     public boolean canPlay(Player p) {
-        return (state.currentPlayer == p);
+        return (currentState.currentPlayer.id == p.id);
     }
 
-    public void processCommand() {
-
-    }
-
-
+    /* basic roll dice, 1 to 12 */
     public int rollDices() {
         Random r = new Random();
         return r.nextInt(1,13);
     }
 
     /* Player can have an advantage at rollDices ?
-    * Maybe next evol
-    * */
+    * Maybe in next feature
+    */
     public int rollDices(Player p) {
         Random r = new Random();
         return r.nextInt(1,13);
     }
-
-    public boolean test() {
-        return true;
-    }
-
 }

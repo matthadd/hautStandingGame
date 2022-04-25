@@ -11,7 +11,8 @@ public class State implements Serializable {
 
     public Player currentPlayer;
 
-    public int turn = 0;
+    public int playerIdPointer = 0;
+    
 
     public State() throws IOException {
         this.board = new Board();
@@ -19,8 +20,12 @@ public class State implements Serializable {
 
     public void addPlayers(Player... players) {
         for (Player p : players) {
+
+            // give player new id
+            p.setId(this.players.size());
+
+            // add it to the state list
             this.players.add(p);
-            System.out.println(p);
         }
     }
 
@@ -35,20 +40,22 @@ public class State implements Serializable {
         return this.currentPlayer;
     }
 
-    public Player incrementPlayer() {
-        this.turn +=1;
-        return  new Player();
+    public void incrementPlayer() {
+        this.playerIdPointer = (this.playerIdPointer + 1) % players.size();
+        this.currentPlayer = this.players.get(playerIdPointer);
+    }
+
+    public void replacePlayerById(Player player) {
+        this.players.set(player.id, player);
+    }
+
+    public Player getPlayerById(int id) {
+        if (this.players.size() < id) return null;
+        return this.players.get(id);
     }
 
     public boolean canPlayer(Player p) {
         return (p.id == this.getCurrentPlayer().id);
     }
-
-
-
-    public int toTest() {
-        return 0;
-    }
-
 
 }
