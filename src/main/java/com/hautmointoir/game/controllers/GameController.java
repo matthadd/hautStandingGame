@@ -5,7 +5,6 @@ import com.hautmointoir.game.server.engine.DrawCardCommand;
 import com.hautmointoir.game.server.engine.MoveCommand;
 import com.hautmointoir.game.shared.Player;
 import com.hautmointoir.game.shared.Room;
-import com.hautmointoir.game.shared.State;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
@@ -55,12 +54,12 @@ public class GameController {
     @PostMapping("/login")
     @ResponseBody
     public boolean login(@RequestBody int id) {
-        // check if player exist
+        // check if id exist
 
         // if false
-        // add Player to list
+        // return 404
 
-        // return Player id
+        // return true
 
         return true;
     }
@@ -84,7 +83,7 @@ public class GameController {
 
     @GetMapping("/update")
     @ResponseBody
-    public String update(@RequestParam int roomID) {
+    public String update(@RequestParam int roomID) throws IOException {
 
         // check if room exist
 
@@ -94,7 +93,9 @@ public class GameController {
         // if false
         // return room close msg (ex : {room : closed}, or 404 Error, ...)
 
-        return "ID: " + roomID;
+        ObjectMapper mapper = new ObjectMapper();
+        Room room = new Room(roomID);
+        return mapper.writeValueAsString(room);
     }
 
     @PostMapping("/roll")
@@ -104,20 +105,10 @@ public class GameController {
         // if not send packet room closed
 
         // else
-        // then need player id ?
+        // then need player id
+        // move command
         // return current state of the room
-        return "ID: ";
-    }
 
-    @PostMapping("/draw")
-    @ResponseBody
-    public String draw(@RequestBody DrawCardCommand actionCommand) {
-        // check if room doesnt exist
-        // if not send packet room closed
-
-        // else
-        // then need player id ?
-        // return current state of the room
         return "ID: ";
     }
 

@@ -3,8 +3,6 @@ package com.hautmointoir.game.server.engine;
 import com.hautmointoir.game.shared.Player;
 import com.hautmointoir.game.shared.State;
 
-import java.util.Random;
-
 public class MoveCommand extends Engine {
 
     State currentState;
@@ -13,21 +11,35 @@ public class MoveCommand extends Engine {
         this.currentState = state;
     }
 
-    public Player process(Player player) {
-        if(this.currentState.currentPlayer.id != player.id) return null;
+    // process make modification and send the new state to load
+    public State process(int playerID) {
+        // if the player is not supposed to play : do nothing
+        if (this.currentState.playerIdPointer != playerID) return null;
+
+        Player player = this.currentState.getPlayerById(playerID);
 
         int expectedPosition = player.getPosition() + this.rollDices();
 
-        if (expectedPosition > this.currentState.board.size()){
+        this.currentState.board.size(); // debug
+
+        // if expected position is outside board walk backward
+        if (expectedPosition > this.currentState.board.size()) {
             int diff = expectedPosition - this.currentState.board.size();
-            player.setPosition( player.getPosition() - diff);
-            return player;
+            player.setPosition(player.getPosition() - diff);
+            this.currentState.replacePlayerById(player);
+        } else {
+            // else replace position with expected position
+            player.setPosition(expectedPosition);
+            // replace the old player object with the new in the state
+            this.currentState.replacePlayerById(player);
+
         }
 
-        player.setPosition(expectedPosition);
-        return player;
-    }
 
+        // finally increment player position and return the new state
+        this.currentState.incrementPlayer();
+        return this.currentState;
+    }
 
 
 }
